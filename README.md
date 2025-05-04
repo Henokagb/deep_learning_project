@@ -1,7 +1,7 @@
-# Deep Learning Project: Abstractive Summarization of Research Papers
+# Deep Learning Project: Summarization
 
 ## Project Overview
-This project focuses on abstractive summarization of research paper abstracts into concise titles using state-of-the-art deep learning models. The models fine-tuned include `mT5-small` and `BART-base`. The project also includes an API for generating summaries using the fine-tuned BART model.
+This project focuses on abstractive summarization of any kind of text (research paper abstracts, etc...) into concise titles using state-of-the-art deep learning models. The models fine-tuned include `mT5-small` and `BART-base`. The project also includes an API for generating summaries using the fine-tuned BART model.
 
 ## Features
 - Fine-tuned abstractive summarization models.
@@ -44,21 +44,27 @@ This project focuses on abstractive summarization of research paper abstracts in
 2. Run the API Locally
 Navigate to the api/ directory and run the FastAPI server:
 
+```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
+```
 
-3. Access the API
+4. Access the API
 Once the server is running, you can access the API at http://localhost:8000/docs for interactive documentation.
 
 Docker Instructions
 1. Build the Docker Image
 Navigate to the api/ directory and build the Docker image:
+
+```bash
 docker build -t summarization-api .
-
-2. Run the Docker Container
+```
+3. Run the Docker Container
 Run the container exposing port 8000:
-docker run -p 8000:8000 summarization-api
+```bash
+docker run -p 8000:8000 <imageid>
+```
 
-3. Access the API
+5. Access the API
 Access the API at http://localhost:8000/docs for interactive documentation.
 
 Example API Usage

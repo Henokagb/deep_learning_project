@@ -30,61 +30,62 @@ This project focuses on abstractive summarization of any kind of text (research 
 *   **`.gitignore`**: Prevents committing unnecessary files/folders: __pycache__/, mlruns/).
 *   **`data/`**: Stores the raw training dataset
 *   **`final.ipynb`**: Contains the primary Jupyter/Colab notebooks for analysis, training, and evaluation.
-*   **`results/`**: A place to store outputs like saved model checkpoints. It's often excluded from Git via `.gitignore` unless Git LFS is used for large files.
+*   **`results/`**: The place to store outputs like saved model checkpoints.
 *   **`requirements.txt`**: Generated using `pip freeze > requirements.txt`. Ensures others can recreate the exact environment.
-*   **`README.md`**: Description of the project for reproducibility:
-    *   Project Title and Goal
-    *   Dataset description and how to obtain it.
-    *   Setup instructions (`pip install -r requirements.txt`).
-    *   How to run the code (e.g., execute the notebook cells sequentially).
-    *   Summary of results (baseline vs. models).
-    *   Instructions on how to use the fine-tuned model (e.g., from Hugging Face Hub).
-    *   Information about the repository structure.
 
-2. Run the API Locally
+## Running the project
+
+The notebook contains the differents steps of realising constructing the model with some descriptions with Markdown.
+First you need to install the required modules:
+```bash
+pip install -r requirements.txt
+```
+
+The notebook uses some functions that we coded in separate files for modularization.You need to have the `src` folder with all its files on the server on which the notebook is executed.
+The dataset is in the `data` project.
+
+
+## Run the API Locally
 Navigate to the api/ directory and run the FastAPI server:
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
+Once the server is running, you can access the API at http://localhost:8000/docs for interactive testing.
 
-4. Access the API
-Once the server is running, you can access the API at http://localhost:8000/docs for interactive documentation.
+Example API Usage:
+Send a POST request to the /summarize-text endpoint with the following JSON payload:
 
-Docker Instructions
-1. Build the Docker Image
+```bash
+{
+  "text": "This is an example abstract of a research paper...",
+  "max_len": 50
+}
+```
+
+Response:
+```bash
+{
+  "key_idea": "Generated summary of the abstract."
+}
+```
+
+## Build the Docker Image
+If you want to get an image of the API:
 Navigate to the api/ directory and build the Docker image:
 
 ```bash
 docker build -t summarization-api .
 ```
-3. Run the Docker Container
 Run the container exposing port 8000:
 ```bash
 docker run -p 8000:8000 <imageid>
 ```
+Access the API at http://localhost:8000/docs.
 
-5. Access the API
-Access the API at http://localhost:8000/docs for interactive documentation.
+## Deployment on render
 
-Example API Usage
-Send a POST request to the /summarize-text endpoint with the following JSON payload:
+We also deployed the API on the platform Render from its Docker image.
+Since we used a free instance, it spins down with inactivity, which can delay requests by 50 seconds or more.
+It is available there: https://summarize-api-x7cu.onrender.com/docs
 
-{
-  "text": "This is an example abstract of a research paper...",
-  "max_len": 50
-}
-
-Response:
-
-
-{
-  "key_idea": "Generated summary of the abstract."
-}
-
-Future Work
-Extend the API to support multiple models.
-Add more robust error handling in the API.
-Explore deployment on cloud platforms like AWS or Azure.
-License
-This project is licensed under the MIT License. ```

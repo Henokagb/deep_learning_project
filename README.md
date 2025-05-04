@@ -2,6 +2,7 @@
 
 ## Project Overview
 This project focuses on abstractive summarization of any kind of text (research paper abstracts, etc...) into concise titles using state-of-the-art deep learning models. The models fine-tuned include `mT5-small` and `BART-base`. The project also includes an API for generating summaries using the fine-tuned BART model.
+Hosted on: https://github.com/Henokagb/deep_learning_project
 
 ## Features
 - Fine-tuned abstractive summarization models.
